@@ -1,0 +1,78 @@
+
+//WEEKEND TODO//
+
+Project setup
+clone repo
+init project
+install dependencies
+    bootstrap
+    jquery  
+    express
+    body-parser
+    PG
+
+
+//Front End//
+HTML DOM
+    inputs
+    button create task 
+    button complete task
+    button update text
+    button delete task 
+        alert are you sure
+
+style.css
+    bootstrap
+    style
+
+jquery.js
+    click listeners
+    create task
+    update task text
+    update complete task
+    delete task
+
+Client.js
+    Routes.js
+    GET all tasks
+        show incomplete --completed: true || completed:false
+        sort data by task name, date
+    POST add tasks
+        create new task new task
+    PUT update tasks
+        update existing task
+        button toggle complete -- update visual 
+    DELETE tasks -- delete button
+        alert are you sure - confirm delete
+    Render to DOM
+
+
+//Back End//
+modules
+
+express()Server
+    routes
+    GET all tasks
+    POST add tasks
+    PUT update tasks
+    DELETE tasks
+
+PG node.js
+
+SQL Database todo
+    Tables-
+
+    "tasks"
+    "id" SERIAL PRIMARY KEY
+    "task-name" VARCHAR(64)
+    "completed" BOOLEAN
+    "date" DATE
+
+    "titles"
+    "id" SERIAL PRIMARY KEY
+    "title-name" VARCHAR(32)
+    "date" DATE
+
+
+
+

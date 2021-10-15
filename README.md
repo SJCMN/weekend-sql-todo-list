@@ -1,8 +1,8 @@
-# Project Name
+# WEEKEND-TODO
 
 [Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
 
-## Description
+## Weekend TODO Application
 
 Your project description goes here. What problem did you solve? How did you solve it?
 
