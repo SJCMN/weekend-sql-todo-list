@@ -4,31 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="vendors/jquery-3.6.0.min.js" charset="utf-8"></script>
+    <script src="scripts/client.js" charset="utf-8"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/style.css">
-
     <title>ToDo</title>
 </head>
-<body class="">
+<body class="bg-light">
     <div class="bg-dark">
         <header class="container d-flex py-3">
         <h1>ToDos</h1>
         </header>
     </div>
-    <main id="listArea" class="container">
-        <div class="card"> 
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>completed</th>
-                <th>Task</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody class="viewTasks">
-            </tbody>
-          </table>
+    <main id="listArea" class="container p-4">
+
+        <div class=""> 
+            <ul class="list-group viewTasks">
+                <li class="list-group-item list-group-item-action ">
+                    <!-- <input class= "form-check-input me-1" type="checkbox" value=""> -->
+                    <input class="form-control" type="text" value="">
+                    
+                <li class="list-group-item list-group-item-action ">
+                    <input class="form-check-input me-1" type="checkbox" value="">
+                    First Item
+                </li>
+                <li class="list-group-item list-group-item-action ">
+                    <input class="form-check-input me-1" type="checkbox" value="">
+                    Second Item
+                </li>
+                <li class="list-group-item list-group-item-action ">
+                    <input class="form-check-input me-1" type="checkbox" value="">
+                    Third Item
+                </li>
+                <li class="list-group-item list-group-item-action ">
+                    <input class="form-check-input me-1" type="checkbox" value="">
+                    Fourth Item
+                </li>
+            </ul>
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Delete Selected</button>
+                <input type="text" class="form-control" placeholder="List Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <span class="input-group-text" >Sat Oct 16</span>
+            </div>
         </div>
+
+        </div>
+
+
+
+
     </main>
     <div class="bg-dark fixed-bottom">
         <footer class="container d-flex py-3">
