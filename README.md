@@ -1,4 +1,7 @@
-## WEEKEND TODO - Local Install
+
+# Weekend TODO App
+
+## Local Install
 
 To use this project:
 Fork this repo.
@@ -8,7 +11,7 @@ Create a sql database - see database.sql for queries.
 NPM START to activate a server.
 Browse to localhost:5000.
 
-## Weekend TODO Application - Overview
+## Project Overview
 
 This is a TODO app using full-stack CRUD HTTP interactions. 
 The front end was created with Javascript, jQuery, HTML, Bootstrap, and some additional css. 
