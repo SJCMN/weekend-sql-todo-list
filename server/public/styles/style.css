@@ -23,11 +23,17 @@ bg-dark {
     background-color: var(--gunmetal);
 }
 
-#listArea {
-
-
+.deleteBtn:hover {
+    background-color: var(--pale-cerulean);
 }
 
+.radioActive:active, .radioActive:checked, .radioActive:hover {
+    background-color: var(--pale-cerulean);
+}
+
+.radioActive:focus, .inputActive:focus {
+    box-shadow: none;
+}
 
 h1, h2, h3, h4, h5 {
     padding: 50px;

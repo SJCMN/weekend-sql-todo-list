@@ -18,40 +18,34 @@
     </div>
     <main id="listArea" class="container p-4">
 
-        <div class=""> 
-            <ul class="list-group viewTasks">
+        <div class="singleList p-2"> 
+            <div class="input-group">
+                <button class="btn btn-outline-secondary deleteBtn " type="button">Delete Selected</button>
+                <input type="text" class="form-control inputActive" placeholder="List Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <span class="input-group-text " >Sat Oct 16</span>
+            </div>
+            <ul class="list-group taskList">
                 <li class="list-group-item list-group-item-action ">
-                    <!-- <input class= "form-check-input me-1" type="checkbox" value=""> -->
-                    <input class="form-control" type="text" value="">
+                    <input class="form-control inputActive" type="text" value="">
                     
                 <li class="list-group-item list-group-item-action ">
-                    <input class="form-check-input me-1" type="checkbox" value="">
+                    <input class="form-check-input me-1 radioActive" type="checkbox" value="">
                     First Item
                 </li>
                 <li class="list-group-item list-group-item-action ">
-                    <input class="form-check-input me-1" type="checkbox" value="">
+                    <input class="form-check-input me-1 radioActive" type="checkbox" value="">
                     Second Item
                 </li>
                 <li class="list-group-item list-group-item-action ">
-                    <input class="form-check-input me-1" type="checkbox" value="">
+                    <input class="form-check-input me-1 radioActive" type="checkbox" value="">
                     Third Item
                 </li>
                 <li class="list-group-item list-group-item-action ">
-                    <input class="form-check-input me-1" type="checkbox" value="">
+                    <input class="form-check-input me-1 radioActive" type="checkbox" value="">
                     Fourth Item
                 </li>
             </ul>
-            <div class="input-group mb-3">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Delete Selected</button>
-                <input type="text" class="form-control" placeholder="List Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                <span class="input-group-text" >Sat Oct 16</span>
-            </div>
         </div>
-
-        </div>
-
-
-
 
     </main>
     <div class="bg-dark fixed-bottom">
