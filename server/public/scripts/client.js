@@ -2,37 +2,77 @@ console.log('HELLO From JS');
 
 $(document).ready(function () {
     console.log('JQ Ready Now');
-    // Establish Click Listeners
+    
     //click listener for add button
     handleClickListeners();
-    // load existing koalas on page load
+
+    // GET lists and list items from db
     getTasks();
-  }); // end doc ready
-  
-  function handleClickListeners() {
-  
-    // $('#viewKoalas').on('click', '.transferBtn', readyForTransfer)
-    // $('#viewKoalas').on('click', '.deleteBtn', handleDelete)
-  
-    // $('#addButton').on('click', function () {
-    //   console.log('in addButton on click');
-    //   // get user input and put in an object
-    //   // NOT WORKING YET :(
-    //   // using a test object
-    //   let koalaToSend = {
-    //     name: $('#nameIn').val(),
-    //     age: $('#ageIn').val(),
-    //     gender: $('#genderIn').val(),
-    //     readyForTransfer: $('#readyForTransferIn').val(),
-    //     notes: $('#notesIn').val(),
-    //   };
-  
-    //   // call saveKoala with the new object
-    //   saveKoala(koalaToSend);
-    // });
-  }
-  
-  function getTasks() {
-      console.log('In getTasks');
-      
-  }
+}); // end doc ready
+
+function handleClickListeners() {
+
+    
+    $('#newList').keyup(newList)
+    $('#listArea').keyup('.taskList', collectTasks)
+    
+}
+
+function getTasks() {
+    console.log('In getTasks');
+    
+    // get route for tasks
+}
+
+// add new singleList
+function newList(e) {
+    console.log('In newList');
+    if (e.key === "Enter"){
+        let list = $("input:text").focus().select()[0].value
+        // console.log('You pressed the Enter Key after adding a new list: ', list);
+        $('#listArea').append(`
+
+        <div class="singleList p-2"> 
+            <div class="input-group input-group-lg shadow-sm">
+                <input type="text" class="form-control inputActive" placeholder="${list}" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <span class="input-group-text " >${Date().slice(0,10)}</span>
+            </div>
+
+        <ul class="list-group taskList shadow-sm">
+            <li class="list-group-item list-group-item-action ">
+                <input class="form-control inputActive" type="text" value="" placeholder="New Item">
+
+        </ul>
+        <div class="input-group shadow-sm">
+            <select class="form-select" name="affectSelected">
+                <option value="Update Selected">Update</option>
+                <option value="Archive Selected">Archive</option>
+                <option value="Delete Selected">Delete</option>
+            </select>
+            <button class="btn btn-outline-secondary deleteBtn " type="button">Selected</button>
+        </div>
+    </div>
+        `)
+        $("input:text").focus().select()[0].value = ''
+    }
+    
+}
+
+
+// add new <li> with text within input upon enter
+function collectTasks(e) {
+    // console.log('In collectTasks');
+    let task = ''
+    if (e.key === "Enter") {
+        task = $("input:text").focus().select()[2].value
+        // let findTask = $(this).focus().select()
+        console.log('collectTasks - You pressed the Enter Key after typing: ', task);
+        $(this).closest('ul').append(`
+            <li class="list-group-item list-group-item-action ">
+                <input class="form-check-input me-1 radioActive" type="checkbox" value="">
+                ${task}
+            </li>
+          `)
+          $("input:text").focus().select()[2].value = ''
+    }
+}
