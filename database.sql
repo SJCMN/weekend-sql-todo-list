@@ -1,4 +1,5 @@
 
+
 CREATE TABLE "tasks" (
 "id" SERIAL PRIMARY KEY,
 "task_name" VARCHAR(64),
@@ -25,3 +26,12 @@ VALUES
 ('Projects', '10-15-2021'),
 ('Books', '10-15-2021'),
 ('Movies', '10-15-2021');
+
+SELECT * FROM "tasks";
+
+UPDATE "tasks"
+SET "completed" = true
+WHERE "id" = 1;
+
+DELETE FROM "tasks"
+WHERE "id" = 1;

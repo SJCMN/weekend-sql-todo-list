@@ -18,7 +18,7 @@ function handleClickListeners() {
     // listener for new task items
     // adds empty string
     // $('#listArea').keyup('.taskList', collectTasks)
-    $('.taskList').keyup( collectTasks )
+    // $('.taskList').keyup( collectTasks )
 }
 
 function getTasks() {
