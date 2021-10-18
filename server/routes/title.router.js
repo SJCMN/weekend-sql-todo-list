@@ -1,47 +1,47 @@
 const { response } = require('express');
 const express = require('express');
 const { read } = require('fs');
-const taskRouter = express.Router();
+const titleRouter = express.Router();
 
 // DB CONNECTION
 const pool = require('../modules/pool');
 
 // GET
-// this is the tasks GET route
-taskRouter.get(`/`, (req, res) => {
+// this is the titles GET route
+titleRouter.get(`/`, (req, res) => {
     console.log(`Received a GET request`);
     // build the SQL query
-    let queryText = `SELECT * FROM "tasks"`;
+    let queryText = `SELECT * FROM "titles"`;
 
     // send the query to the SQL database
     pool
         .query(queryText)
         .then((response) => {
             // the response here is a bunch of koalas
-            let tasks = response.rows;
-            console.log(`Here are the saved tasks`, tasks);
+            let titles = response.rows;
+            console.log(`Here are the saved titles`, titles);
             // send the tasks to the client
-            res.send(tasks);
+            res.send(titles);
         })
         .catch((error) => {
-            console.log(`There was an error in the GET /tasks route:`, error);
+            console.log(`There was an error in the GET /titles route:`, error);
             // let the client know that there was an error on the server
             res.sendStatus(500);
         });
 });
 
 // POST
-//adds a new task to the task list
-//request body must be a task object with ("task_name", "completed", "date")
-taskRouter.post('/', (req, res) => {
-    console.log(`in post /tasks`);
-    let newTask = req.body;
-    console.log('Adding task', newTask);
+//adds a new title to the title list
+//request body must be a title object with ("title_name", "date")
+titleRouter.post('/', (req, res) => {
+    console.log(`in post /titles`);
+    let newTitle = req.body;
+    console.log('Adding task', newTitle);
 
-    let queryText = `INSERT INTO "tasks" ("task_name", "completed", "date")
+    let queryText = `INSERT INTO "titles" ("title_name",  "date")
     VALUES($1, $2, $3);`;
 
-    let values = [newTask.task_name, newTask.completed, newTask.date]
+    let values = [newTitle.title_name, newTitle.date]
 
     pool
         .query(queryText, values)
@@ -55,20 +55,20 @@ taskRouter.post('/', (req, res) => {
 });
 
 // PUT
-taskRouter.put('/:id', (req, res) => {
+titleRouter.put('/:id', (req, res) => {
     let id = req.params.id;
-    let completed = req.body.completed;
+    let title= req.body.completed;
 
     console.log(id);
     console.log(completed);
 
     let queryText = `
-        UPDATE "tasks"
-        SET "ready_to_transfer" = $2
+        UPDATE "titles"
+        SET "title_name" = $2
         WHERE "id" = $1
          `
 
-    let values = [id, readyForTransfer];
+    let values = [id, title];
 
     pool.query(queryText, values).then(result => {
         res.sendStatus(204);
@@ -80,12 +80,12 @@ taskRouter.put('/:id', (req, res) => {
 })
 
 // DELETE
-taskRouter.delete('/:id', (req, res) => {
+titleRouter.delete('/:id', (req, res) => {
     let id = req.params.id
     console.log(id);
     // pool.query...
     let queryText = `	
-    DELETE FROM "tasks"
+    DELETE FROM "titles"
     WHERE "id" = $1;
     `
     let values = [id];
@@ -100,4 +100,4 @@ taskRouter.delete('/:id', (req, res) => {
 
 });
 
-module.exports = taskRouter;
+module.exports = titleRouter;
