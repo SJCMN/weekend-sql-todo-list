@@ -44,3 +44,11 @@ footer , h5{
     padding: 10px;
     color: var(--white) 
 }
+
+.topBuffer {
+    height: 120px
+}
+
+.bottomBuffer {
+    height: 100px;
+}

@@ -11,11 +11,14 @@
     <title>ToDo</title>
 </head>
 <body class="bg-light d-flex flex-column h-100">
-    <header class="bg-dark ">
+    <header class="bg-dark fixed-top">
         <div class="container d-flex py-3">
         <h1>ToDos</h1>
         </div>
     </header>
+    <div class="topBuffer">
+
+    </div>
 
     <main id="listArea" class="container p-4">
 
@@ -25,8 +28,8 @@
                 <span class="input-group-text " >Sat Oct 16</span>
             </div>
         </div>
-<!-- 
-        <div class="singleList p-2"> 
+
+        <!-- <div class="singleList p-2"> 
             <div class="input-group input-group-lg shadow-sm">
                 <input type="text" class="form-control inputActive" placeholder="List Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
                 <span class="input-group-text " >Sat Oct 16</span>
@@ -35,6 +38,7 @@
             <ul class="list-group taskList shadow-sm">
                 <li class="list-group-item list-group-item-action ">
                     <input class="form-control inputActive" type="text" value="" placeholder="New Item">
+                </li>
 
             </ul>
             <div class="input-group shadow-sm">
@@ -46,8 +50,11 @@
                 <button class="btn btn-outline-secondary deleteBtn " type="button">Selected</button>
             </div>
         </div> -->
-
+  
     </main>
+    <div class="bottomBuffer">
+
+    </div>
 
     <footer class="bg-dark footer mt-auto py-3 fixed-bottom ">
         <div class="container d-flex py-3">

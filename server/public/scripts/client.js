@@ -12,10 +12,13 @@ $(document).ready(function () {
 
 function handleClickListeners() {
 
-    
+    // listener for new list
     $('#newList').keyup(newList)
-    $('#listArea').keyup('.taskList', collectTasks)
-    
+
+    // listener for new task items
+    // adds empty string
+    // $('#listArea').keyup('.taskList', collectTasks)
+    $('.taskList').keyup( collectTasks )
 }
 
 function getTasks() {
@@ -38,7 +41,7 @@ function newList(e) {
                 <span class="input-group-text " >${Date().slice(0,10)}</span>
             </div>
 
-        <ul class="list-group taskList shadow-sm">
+        <ul class="list-group shadow-sm taskList">
             <li class="list-group-item list-group-item-action ">
                 <input class="form-control inputActive" type="text" value="" placeholder="New Item">
 
@@ -55,24 +58,33 @@ function newList(e) {
         `)
         $("input:text").focus().select()[0].value = ''
     }
-    
+    $('.taskList').keyup( collectTasks )
 }
 
 
 // add new <li> with text within input upon enter
 function collectTasks(e) {
     // console.log('In collectTasks');
-    let task = ''
+    
     if (e.key === "Enter") {
-        task = $("input:text").focus().select()[2].value
+       let task = $(document.activeElement).val()
+        // $("input:text").focus().select()[2].value
         // let findTask = $(this).focus().select()
         console.log('collectTasks - You pressed the Enter Key after typing: ', task);
-        $(this).closest('ul').append(`
+     
+        // set variable for new text    
+        newTask = (`
             <li class="list-group-item list-group-item-action ">
-                <input class="form-check-input me-1 radioActive" type="checkbox" value="">
-                ${task}
+                 <input class="form-check-input me-1 radioActive" type="checkbox" value="">
+                 ${task}
             </li>
-          `)
-          $("input:text").focus().select()[2].value = ''
+          `);
+
+        taskList = $(document.activeElement).closest('ul')
+        console.log('this is the taskList target:', taskList);
+
+        // append the list with the task text
+        taskList.append( newTask );  
+        $(document.activeElement).val('')
     }
 }
