@@ -22,35 +22,19 @@
 
     <main id="listArea" class="container p-4">
 
-        <div class="singleList listInput p-2 "> 
-            <div class="input-group input-group-lg shadow-sm">
-                <input type="text" id="newList" class="form-control inputActive" placeholder="Start New List" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                <span class="input-group-text " >Sat Oct 16</span>
-            </div>
+        <div class="input-group">
+            <input type="text" class="form-control" id="taskIn" placeholder="Enter New Task">
+            <input type="text" class="form-control" id="categoryIn" placeholder="Enter Task Category">
+            <button id="addTask" class="btn btn-outline-secondary">Add Task</button>
+        </div>
+        <div>
+            <ul class="list-group">
+                <li class="list-group-item taskOut">Item One</li>
+                <li class="list-group-item taskOut">Item Two</li>
+                <li class="list-group-item taskOut">Item Three</li>
+            </ul>
         </div>
 
-        <!-- <div class="singleList p-2"> 
-            <div class="input-group input-group-lg shadow-sm">
-                <input type="text" class="form-control inputActive" placeholder="List Name" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                <span class="input-group-text " >Sat Oct 16</span>
-            </div>
-
-            <ul class="list-group taskList shadow-sm">
-                <li class="list-group-item list-group-item-action ">
-                    <input class="form-control inputActive" type="text" value="" placeholder="New Item">
-                </li>
-
-            </ul>
-            <div class="input-group shadow-sm">
-                <select class="form-select" name="affectSelected">
-                    <option value="Update Selected">Update</option>
-                    <option value="Archive Selected">Archive</option>
-                    <option value="Delete Selected">Delete</option>
-                </select>
-                <button class="btn btn-outline-secondary deleteBtn " type="button">Selected</button>
-            </div>
-        </div> -->
-  
     </main>
     <div class="bottomBuffer">
 

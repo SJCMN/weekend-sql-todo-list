@@ -58,7 +58,7 @@ function newList(e) {
         `)
         $("input:text").focus().select()[0].value = ''
     }
-    $('.taskList').keyup( collectTasks )
+    $('.taskList').keyup( collectTasks )m
 }
 
 
