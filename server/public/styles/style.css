@@ -55,4 +55,5 @@ footer , h5{
 
 .taskComplete {
     background-color: var(--pale-cerulean);
+    color: rgba(41, 50, 65, 0.651)
 }
