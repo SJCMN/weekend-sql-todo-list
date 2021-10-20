@@ -74,7 +74,8 @@ function renderTasks( tasks ) {
             let eachTask = $(`
             <div class="input-group">
                 <li class="form-control taskOut">${task.task}</li>
-                <button class="btn btn-outline-secondary deleteBtn ${task.isComplete} " data-id="${task.id}"=>Delete Task</button>
+                <button class="btn btn-outline-secondary completeBtn ${task.isComplete} " data-id="${task.id}"=>Complete Task</button>
+                <button class="btn btn-outline-secondary deleteBtn " data-id="${task.id}"=>Delete Task</button>
             </div>
             `);
 
