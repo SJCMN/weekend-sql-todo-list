@@ -18,7 +18,6 @@ taskRouter.get(`/`, (req, res) => {
         .then((response) => {
             // the response here is a bunch of koalas
             let tasks = response.rows;
-            // console.log(`Here are the saved tasks`, tasks);
             // send the tasks to the client
             res.send(tasks);
         })
@@ -31,7 +30,6 @@ taskRouter.get(`/`, (req, res) => {
 
 // POST
 //adds a new task to the task list
-//request body must be a task object with ("task_name", "completed", "date")
 taskRouter.post('/', (req, res) => {
     console.log(`in post /tasks`);
     let newTask = req.body.task;

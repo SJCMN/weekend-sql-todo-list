@@ -37,11 +37,9 @@ function completeTask() {
         completedStatus : $( this ).data('id'),
         completedId : $( this ).closest('div').data('id')
     }
-    console.log('before', taskToUpdate.completedStatus);
-    
+   
     taskToUpdate.completedStatus = !taskToUpdate.completedStatus;
-    console.log('after', taskToUpdate.completedStatus);
-    console.log('In completeTask', taskToUpdate.completedStatus, taskToUpdate.completedId);
+ 
     $.ajax({
         method: 'PUT',
         url: '/tasks',
@@ -93,11 +91,24 @@ function getTasks() {
 
 function renderTasks( tasks ) {
     console.log('In renderTasks');
+    // add toggle render
+    let eachTask
     // clear DOM of any tasks
         $('#listArea').empty();
     // loop over each task
         for ( let task of tasks ) {
-            let eachTask = $(`
+            if (task.isComplete === true){
+
+                eachTask = $(`
+            <div class="input-group" data-id="${task.id}">
+                <li class="form-control taskOut taskComplete" >${task.task}</li>
+                <button class="btn btn-outline-secondary completeBtn taskComplete" data-id="${task.isComplete}">Complete Task</button>
+                <button class="btn btn-outline-secondary deleteBtn" data-id="${task.id}">Delete Task</button>
+            </div>
+            `);
+
+            } else {
+            eachTask = $(`
             <div class="input-group" data-id="${task.id}">
                 <li class="form-control taskOut" >${task.task}</li>
                 <button class="btn btn-outline-secondary completeBtn" data-id="${task.isComplete}">Complete Task</button>
@@ -109,8 +120,11 @@ function renderTasks( tasks ) {
             //     eachTask.addClass('completed')
             // }
             
+            }
     // render to DOM each task
+
     $('#listArea').append(eachTask)
+
 }
 }
 

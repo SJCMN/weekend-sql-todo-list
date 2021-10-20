@@ -52,3 +52,7 @@ footer , h5{
 .bottomBuffer {
     height: 100px;
 }
+
+.taskComplete {
+    background-color: var(--pale-cerulean);
+}
