@@ -1,90 +1,90 @@
 console.log('HELLO From JS');
 
-$(document).ready(function () {
+
+$(document).ready(onReady);
+
+function onReady() {
     console.log('JQ Ready Now');
-    
-    //click listener for add button
-    handleClickListeners();
-
-    // GET lists and list items from db
+    $('#addTask').on('click', addTask)
+    $('#listArea').on('click', '.deleteBtn', deleteTask)
     getTasks();
-}); // end doc ready
+}
 
-function handleClickListeners() {
 
-    // listener for new list
-    $('#newList').keyup(newList)
+function addTask(){
+    let newTask = {task: $('#taskIn').val()};
+    console.log('In addTask:', newTask);
+    $.ajax({
+        method: 'POST',
+        url: '/tasks',
+        data: newTask 
+    })
+    .then(function( response ) {
+        console.log( 'Got response', response );
+        getTasks();
+        $('#taskIn').val('')
+      })
+      .catch( function(error) {
+       console.log('Error sending new tasks', error);
+      })
+    
+}
 
-    // listener for new task items
-    // adds empty string
-    // $('#listArea').keyup('.taskList', collectTasks)
-    // $('.taskList').keyup( collectTasks )
+function deleteTask(){
+    
+        let id = $( this ).data('id');
+        console.log('In deleteTask', this, id);
+        $.ajax({
+            method: 'DELETE',
+            url: `/tasks/${id}`
+        })
+        .then(function( response ) {
+            console.log( 'Got response', response );
+            getTasks();
+          })
+          .catch( function(error) {
+            console.log('Error deleting tasks', error);
+          })
+  
 }
 
 function getTasks() {
     console.log('In getTasks');
-    
-    // get route for tasks
-}
+    // call to server to request all tasks
+        $.ajax({
+          method: 'GET',
+          url: '/tasks',
+        })
+          .then( function( response ) {
+            console.log( 'Got response', response )
+            renderTasks( response );
+          })
+          .catch( function(error) {
+            console.log('Error getting tasks', error);
+          })
+      }
+  
 
-// add new singleList
-function newList(e) {
-    console.log('In newList');
-    if (e.key === "Enter"){
-        let list = $("input:text").focus().select()[0].value
-        // console.log('You pressed the Enter Key after adding a new list: ', list);
-        $('#listArea').append(`
-
-        <div class="singleList p-2"> 
-            <div class="input-group input-group-lg shadow-sm">
-                <input type="text" class="form-control inputActive" placeholder="${list}" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                <span class="input-group-text " >${Date().slice(0,10)}</span>
+function renderTasks( tasks ) {
+    console.log('In renderTasks');
+    // clear DOM of any tasks
+        $('#listArea').empty();
+    // loop over each task
+        for ( let task of tasks ) {
+            let eachTask = $(`
+            <div class="input-group">
+                <li class="form-control taskOut">${task.task}</li>
+                <button class="btn btn-outline-secondary deleteBtn ${task.isComplete} " data-id="${task.id}"=>Delete Task</button>
             </div>
+            `);
 
-        <ul class="list-group shadow-sm taskList">
-            <li class="list-group-item list-group-item-action ">
-                <input class="form-control inputActive" type="text" value="" placeholder="New Item">
-
-        </ul>
-        <div class="input-group shadow-sm">
-            <select class="form-select" name="affectSelected">
-                <option value="Update Selected">Update</option>
-                <option value="Archive Selected">Archive</option>
-                <option value="Delete Selected">Delete</option>
-            </select>
-            <button class="btn btn-outline-secondary deleteBtn " type="button">Selected</button>
-        </div>
-    </div>
-        `)
-        $("input:text").focus().select()[0].value = ''
-    }
-    $('.taskList').keyup( collectTasks )m
+            // if (eachTask.task.isComplete === true) {
+            //     eachTask.addClass('completed')
+            // }
+            
+    // render to DOM each task
+    $('#listArea').append(eachTask)
+}
 }
 
-
-// add new <li> with text within input upon enter
-function collectTasks(e) {
-    // console.log('In collectTasks');
-    
-    if (e.key === "Enter") {
-       let task = $(document.activeElement).val()
-        // $("input:text").focus().select()[2].value
-        // let findTask = $(this).focus().select()
-        console.log('collectTasks - You pressed the Enter Key after typing: ', task);
-     
-        // set variable for new text    
-        newTask = (`
-            <li class="list-group-item list-group-item-action ">
-                 <input class="form-check-input me-1 radioActive" type="checkbox" value="">
-                 ${task}
-            </li>
-          `);
-
-        taskList = $(document.activeElement).closest('ul')
-        console.log('this is the taskList target:', taskList);
-
-        // append the list with the task text
-        taskList.append( newTask );  
-        $(document.activeElement).val('')
-    }
-}
+  

@@ -11,11 +11,10 @@ const pool = require('../modules/pool');
 taskRouter.get(`/`, (req, res) => {
     console.log(`Received a GET request`);
     // build the SQL query
-    let queryText = `SELECT * FROM "tasks"`;
+    let queryText = `SELECT * FROM "taskTable"`;
 
     // send the query to the SQL database
-    pool
-        .query(queryText)
+    pool.query(queryText)
         .then((response) => {
             // the response here is a bunch of koalas
             let tasks = response.rows;
@@ -35,13 +34,15 @@ taskRouter.get(`/`, (req, res) => {
 //request body must be a task object with ("task_name", "completed", "date")
 taskRouter.post('/', (req, res) => {
     console.log(`in post /tasks`);
-    let newTask = req.body;
-    console.log('Adding task', newTask);
+    let newTask = req.body.task;
+    console.log('Adding task:', newTask);
 
-    let queryText = `INSERT INTO "tasks" ("task_name", "completed", "date")
-    VALUES($1, $2, $3);`;
+    let queryText = `
+    INSERT INTO "taskTable" 
+    ("task")
+    VALUES ($1);`;
 
-    let values = [newTask.task_name, newTask.completed, newTask.date]
+    let values = [newTask]
 
     pool
         .query(queryText, values)
@@ -54,30 +55,30 @@ taskRouter.post('/', (req, res) => {
         });
 });
 
-// PUT
-taskRouter.put('/:id', (req, res) => {
-    let id = req.params.id;
-    let completed = req.body.completed;
+// // PUT
+// taskRouter.put('/:id', (req, res) => {
+//     let id = req.params.id;
+//     let completed = req.body.completed;
 
-    console.log(id);
-    console.log(completed);
+//     console.log(id);
+//     console.log(completed);
 
-    let queryText = `
-        UPDATE "tasks"
-        SET "ready_to_transfer" = $2
-        WHERE "id" = $1
-         `
+//     let queryText = `
+//         UPDATE "tasks"
+//         SET "ready_to_transfer" = $2
+//         WHERE "id" = $1
+//          `
 
-    let values = [id, completed];
+//     let values = [id, completed];
 
-    pool.query(queryText, values).then(result => {
-        res.sendStatus(204);
+//     pool.query(queryText, values).then(result => {
+//         res.sendStatus(204);
 
-    }).catch(err => {
-        console.log('Error with GET query', err);
-        res.sendStatus(500);
-    })
-})
+//     }).catch(err => {
+//         console.log('Error with GET query', err);
+//         res.sendStatus(500);
+//     })
+// })
 
 // DELETE
 taskRouter.delete('/:id', (req, res) => {
@@ -85,7 +86,7 @@ taskRouter.delete('/:id', (req, res) => {
     console.log(id);
     // pool.query...
     let queryText = `	
-    DELETE FROM "tasks"
+    DELETE FROM "taskTable"
     WHERE "id" = $1;
     `
     let values = [id];
