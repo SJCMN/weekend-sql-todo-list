@@ -18,7 +18,7 @@ taskRouter.get(`/`, (req, res) => {
         .then((response) => {
             // the response here is a bunch of koalas
             let tasks = response.rows;
-            console.log(`Here are the saved tasks`, tasks);
+            // console.log(`Here are the saved tasks`, tasks);
             // send the tasks to the client
             res.send(tasks);
         })
@@ -55,30 +55,29 @@ taskRouter.post('/', (req, res) => {
         });
 });
 
-// // PUT
-// taskRouter.put('/:id', (req, res) => {
-//     let id = req.params.id;
-//     let completed = req.body.completed;
+// PUT
+taskRouter.put('/', (req, res) => {
+    let completedStatus = req.body.completedStatus;
+    let id = req.body.completedId;
 
-//     console.log(id);
-//     console.log(completed);
+    console.log('the current status is: ', completedStatus);
 
-//     let queryText = `
-//         UPDATE "tasks"
-//         SET "ready_to_transfer" = $2
-//         WHERE "id" = $1
-//          `
+    let queryText = `
+        UPDATE "taskTable"
+        SET "isComplete" = $2
+        WHERE "id" = $1
+         `
 
-//     let values = [id, completed];
+    let values = [id, completedStatus];
 
-//     pool.query(queryText, values).then(result => {
-//         res.sendStatus(204);
+    pool.query(queryText, values).then(result => {
+        res.sendStatus(204);
 
-//     }).catch(err => {
-//         console.log('Error with GET query', err);
-//         res.sendStatus(500);
-//     })
-// })
+    }).catch(err => {
+        console.log('Error with GET query', err);
+        res.sendStatus(500);
+    })
+})
 
 // DELETE
 taskRouter.delete('/:id', (req, res) => {

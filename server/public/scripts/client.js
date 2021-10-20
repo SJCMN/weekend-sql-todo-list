@@ -7,6 +7,7 @@ function onReady() {
     console.log('JQ Ready Now');
     $('#addTask').on('click', addTask)
     $('#listArea').on('click', '.deleteBtn', deleteTask)
+    $('#listArea').on('click', '.completeBtn', completeTask)
     getTasks();
 }
 
@@ -28,6 +29,31 @@ function addTask(){
        console.log('Error sending new tasks', error);
       })
     
+}
+
+function completeTask() {
+    
+    let taskToUpdate = {
+        completedStatus : $( this ).data('id'),
+        completedId : $( this ).closest('div').data('id')
+    }
+    console.log('before', taskToUpdate.completedStatus);
+    
+    taskToUpdate.completedStatus = !taskToUpdate.completedStatus;
+    console.log('after', taskToUpdate.completedStatus);
+    console.log('In completeTask', taskToUpdate.completedStatus, taskToUpdate.completedId);
+    $.ajax({
+        method: 'PUT',
+        url: '/tasks',
+        data: taskToUpdate
+    })
+    .then(function( response ) {
+        console.log( 'Got response', response );
+        getTasks();
+      })
+      .catch( function(error) {
+        console.log('Error updating tasks', error);
+      })
 }
 
 function deleteTask(){
@@ -72,10 +98,10 @@ function renderTasks( tasks ) {
     // loop over each task
         for ( let task of tasks ) {
             let eachTask = $(`
-            <div class="input-group">
-                <li class="form-control taskOut">${task.task}</li>
-                <button class="btn btn-outline-secondary completeBtn ${task.isComplete} " data-id="${task.id}"=>Complete Task</button>
-                <button class="btn btn-outline-secondary deleteBtn " data-id="${task.id}"=>Delete Task</button>
+            <div class="input-group" data-id="${task.id}">
+                <li class="form-control taskOut" >${task.task}</li>
+                <button class="btn btn-outline-secondary completeBtn" data-id="${task.isComplete}">Complete Task</button>
+                <button class="btn btn-outline-secondary deleteBtn" data-id="${task.id}">Delete Task</button>
             </div>
             `);
 
